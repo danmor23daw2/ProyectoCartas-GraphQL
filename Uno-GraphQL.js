@@ -1,8 +1,11 @@
 const express = require('express');
 const { graphqlHTTP } = require('express-graphql');
 const { graphql, buildSchema } = require('graphql');
+const path = require('path');
 
-const app = express();
+const app = express();  // Inicializa express aquí
+
+app.use(express.static(path.join(__dirname)));
 
 const partidas = [];
 
@@ -370,5 +373,5 @@ app.use('/graphql', graphqlHTTP({
 const PORT = process.env.PORT || 8888;
 
 app.listen(PORT, () => {
-  console.log(`Servidor GraphQL corriendo en http://localhost:${PORT}/graphql`);
+  console.log(`Servidor GraphQL corriendo en http://localhost:${PORT}/consumidor.html`);
 });
