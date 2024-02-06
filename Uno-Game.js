@@ -62,9 +62,18 @@ class Partida {
     if (numJugador === this.turnoActual) {
       const maJugador = this.mans[numJugador - 1];
 
-      if (maJugador.includes(carta) && this.puedeTirarCarta(carta)) {
-        const cartaIndex = maJugador.indexOf(carta);
-        maJugador.splice(cartaIndex, 1);
+      if (maJugador.includes(carta)) {
+        if (this.ultimaCarta === null) {
+          if (!carta.includes("CanviColor") && !carta.includes("AgafaQuatre")) {
+            if (!this.esMismaCartaInicial(carta)) {
+              return `El jugador ${numJugador} debe tirar una carta que coincida con el color o número de la carta inicial.`;
+            }
+          }
+        } else {
+          if (!this.puedeTirarCarta(carta)) {
+            return `El jugador ${numJugador} no puede tirar esta carta en este momento.`;
+          }
+        }
 
         if (carta.includes("CanviColor")) {
           if (!nuevoColor || !["Vermell", "Verd", "Blau", "Groc"].includes(nuevoColor)) {
@@ -144,7 +153,11 @@ class Partida {
       return color === ultimaColor || numero === ultimaNumero;
     }
 
-    if (carta.includes("CanviColor") || carta.includes("AgafaQuatre")) {
+    if (carta.includes("CanviColor")) {
+      return true;
+    }
+
+    if (carta.includes("AgafaQuatre")) {
       return true;
     }
 
@@ -260,11 +273,12 @@ const root = {
 
   acabarJoc: ({ codiPartida }) => {
     if (root.esPartidaValida(codiPartida)) {
-      return partidas[codiPartida - 1].acabarPartida();
+      return partidas[codiPartida - 1].acabarJoc();
     } else {
       return "Codi de partida no vàlid.";
     }
-  }
+  },
+
 };
 
 app.use('/graphql', graphqlHTTP({
