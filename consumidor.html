@@ -190,7 +190,7 @@
       const message = JSON.stringify(data.data.tirarCarta);
       document.getElementById('resultados').innerHTML = message;
 
-      document.getElementById('ultimaCartaTirada').innerHTML = `Última carta tirada: ${cartaTirar} por jugador ${numeroJugador}`;
+      document.getElementById('ultimaCartaTirada').innerHTML = `Última carta tirada: ${nuevoColorTirar} ${cartaTirar} por jugador ${numeroJugador}`;
     }
 
     async function pasarTurno() {
