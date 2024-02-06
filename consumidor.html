@@ -63,6 +63,19 @@
       position: fixed;
       margin-left: -1000px;
       bottom: 20px;
+      margin-bottom: 50px;
+    }
+    #ultimaCartaTirada {
+      display: flex;
+      background-color: #fff;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      width: 100%;
+      position: fixed;
+      margin-left: -1000px;
+      bottom: 20px;
     }
   </style>
 </head>
@@ -110,6 +123,7 @@
   </form>
 
   <div id="resultados"></div>
+  <div id="ultimaCartaTirada"></div>
 
   <script>
     async function iniciarJuego() {
@@ -128,7 +142,8 @@
         }),
       });
       const data = await response.json();
-      document.getElementById('resultados').innerHTML = JSON.stringify(data);
+      const message = data.data.iniciarJoc;
+      document.getElementById('resultados').innerHTML = message;
     }
 
     async function mostrarCartas() {
@@ -148,7 +163,8 @@
         }),
       });
       const data = await response.json();
-      document.getElementById('resultados').innerHTML = JSON.stringify(data);
+      const message = JSON.stringify(data.data.mostrarMaJugador);
+      document.getElementById('resultados').innerHTML = message;
     }
 
     async function tirarCarta() {
@@ -171,7 +187,10 @@
         }),
       });
       const data = await response.json();
-      document.getElementById('resultados').innerHTML = JSON.stringify(data);
+      const message = JSON.stringify(data.data.tirarCarta);
+      document.getElementById('resultados').innerHTML = message;
+
+      document.getElementById('ultimaCartaTirada').innerHTML = `Última carta tirada: ${cartaTirar} por jugador ${numeroJugador}`;
     }
 
     async function pasarTurno() {
@@ -191,7 +210,8 @@
         }),
       });
       const data = await response.json();
-      document.getElementById('resultados').innerHTML = JSON.stringify(data);
+      const message = JSON.stringify(data.data.moureJugador);
+      document.getElementById('resultados').innerHTML = message;
     }
 
     async function finalizarPartida() {
@@ -210,7 +230,8 @@
         }),
       });
       const data = await response.json();
-      document.getElementById('resultados').innerHTML = JSON.stringify(data);
+      const message = JSON.stringify(data.data.acabarJoc);
+      document.getElementById('resultados').innerHTML = message;
     }
   </script>
 </body>
