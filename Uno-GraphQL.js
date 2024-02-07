@@ -197,7 +197,7 @@ class Partida {
                     }
                     
                     this.ultimaCarta = carta;
-                    
+                    this.turnoActual = this.turnoActual % 2 + 1;
                     return `El jugador ${numJugador} ha tirado una carta: ${carta}`;
                     
                     } else {
