@@ -185,9 +185,9 @@ class Partida {
                             
                         return `El jugador ${numJugador} ha tirado ${carta}. El jugador ${jugadorSiguiente} ha robado 2 cartas. No puede tirar en la siguiente ronda.`;
                     } else if (carta.includes("Salta")) {
-                        this.turnoActual = this.turnoActual % 2 + 1;
-                        this.ultimaCarta = carta;
-                        return `El jugador ${numJugador} ha tirado ${carta}. Ha saltado su turno.`;
+                      this.turnoActual = numJugador;
+                      this.ultimaCarta = carta;
+                      return `El jugador ${numJugador} ha tirado ${carta}. Ha saltado el turno del jugador ${numJugador % 2 + 1}. Ahora le toca al jugador ${numJugador}.`;
                     } else if (carta.includes("Inverteix")) {
                         this.turnoActual = numJugador;
                         this.ultimaCarta = carta;
