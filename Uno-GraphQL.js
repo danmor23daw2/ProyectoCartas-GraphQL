@@ -3,7 +3,7 @@ const { graphqlHTTP } = require('express-graphql');
 const { graphql, buildSchema } = require('graphql');
 const path = require('path');
 
-const app = express();  // Inicializa express aquí
+const app = express();  
 
 app.use(express.static(path.join(__dirname)));
 
